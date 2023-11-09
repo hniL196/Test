@@ -20,9 +20,11 @@ namespace Test
         //int StudID, string StudName, string StudGender, int StudAge, string StudClass, float StudAvgMark
         public void Print(Hashtable students)
         {
-            foreach (var key in students)
+            Student student = new Student();
+
+            foreach (DictionaryEntry entry in students)
             {
-                Console.WriteLine(key + ":" + students[key]);
+                Console.WriteLine(entry.Key + ":" + entry.Value);
             }
         }
 
@@ -48,13 +50,8 @@ namespace Test
 
         public float CallAvg(int[] Marklist, float StudAvgMark)
         {
-            Console.WriteLine("Input student Mark:");
-            for (int i = 0; i < MarkList.Length; i++)
-            {
-                Console.WriteLine($"    Input mark {i}:");
-                MarkList[i] = Convert.ToInt32(Console.ReadLine());
-            }
-            StudAvgMark = (MarkList[0] + MarkList[1] + MarkList[2]) / 3;
+            
+            StudAvgMark = (Marklist[0] + Marklist[1] + Marklist[2]) / 3;
 
             return StudAvgMark;
         }
@@ -73,10 +70,18 @@ namespace Test
             student.StudAge = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Input student Class: ");
             student.StudClass = Console.ReadLine();
+            Console.WriteLine("Input student Mark:");
 
+            for (int i = 0; i < MarkList.Length; i++)
+            {
+                Console.WriteLine($"    Input mark {i}:");
+                MarkList[i] = Convert.ToInt32(Console.ReadLine());
+            }
+
+            
             student.StudAvgMark = student.CallAvg(MarkList, StudAvgMark);
 
-            students.Add(student.StudID, student.StudName + student.StudGender + student.StudAge + student.StudClass + student.StudAvgMark);
+            students.Add("ID: " + student.StudID,$"Ten: {student.StudName} - Gioi Tinh: {student.StudGender} - Tuoi: {student.StudAge} - Lop: {student.StudClass}");
         }
 
         public void ShowStudent(Hashtable students)
@@ -90,7 +95,6 @@ namespace Test
             Console.WriteLine("2. Search By Name: ");
             Console.WriteLine("3. Search By Class: ");
             Console.Write("Otion: ");
-
             int choice1 = Convert.ToInt32(Console.ReadLine());
 
             switch (choice1)
@@ -98,15 +102,50 @@ namespace Test
                 case 1:
                     Console.WriteLine("Nhap ID can tim: ");
                     int id = Convert.ToInt32(Console.ReadLine());
-                    foreach (Hashtable student in students)
-                        if (student.ContainsKey(id))
-                            Console.WriteLine(student.Keys);
+                    foreach (var key in students.Keys)
+                        if (key.Equals(id))
+                            Console.WriteLine(key + ":" + students[key]);
+                        else
+                            Console.WriteLine("Khong co");
                     break;
-                case 2:
-                
+                case 2:                
+                    Console.WriteLine("Nhap ten can tim: ");
+                    string name = Console.ReadLine();
+
+                    foreach (var value in students.Values)
+                    {
+                        if (value.ToString().Contains(name))
+                        {
+                            Console.WriteLine(value);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Khong co");
+                        }
+                    }
                     break;
                 case 3:
-
+                    Console.WriteLine("Nhap lop can tim: ");
+                    string classinput = Console.ReadLine();
+                    Hashtable newstudents = new Hashtable();
+                    bool check = false;
+                    int n = 1;
+                    
+                    foreach (var value in students.Values)
+                    {
+                        if (value.ToString().Contains(classinput))
+                        {
+                            newstudents.Add(n++, value.ToString());
+                        }
+                        foreach (var key in newstudents.Keys) 
+                        {
+                            Console.WriteLine(newstudents[key]);
+                        }
+                        //else
+                        //{
+                        //    Console.WriteLine("Khong co");
+                        //}                       
+                    }
                     break;
             }
         }

@@ -12,6 +12,7 @@ public class Program
 
 
         int choice = 0;
+        Start:
         do
         {
             Console.WriteLine();
@@ -32,8 +33,10 @@ public class Program
                 case 3:
                     
                     break;
-                    case 4:
-                    break;
+                case 4:
+                    Console.WriteLine();
+                    student.SearchStudent(students);
+                    goto Start;
             }
         }
         while (choice >0 && choice < 5);
