@@ -32,6 +32,8 @@ public class Program
                 case 3:
                     
                     break;
+                    case 4:
+                    break;
             }
         }
         while (choice >0 && choice < 5);

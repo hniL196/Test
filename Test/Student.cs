@@ -11,7 +11,7 @@ namespace Test
     internal class Student : IStudent
     {
         public int StudID { get; set; }
-        public string StudName { get;set; }
+        public string StudName { get; set; }
         public string StudGender { get; set; }
         public int StudAge { get; set; }
         public string StudClass { get; set; }
@@ -20,15 +20,10 @@ namespace Test
         //int StudID, string StudName, string StudGender, int StudAge, string StudClass, float StudAvgMark
         public void Print(Hashtable students)
         {
-            foreach (var student in students)
+            foreach (var key in students)
             {
-                Console.WriteLine();
+                Console.WriteLine(key + ":" + students[key]);
             }
-        }
-
-        public override string ToString()
-        {
-            return string.Format("ID: {StudID}- Name: {StudName} - Gender: {StudGender} - Age: {StudAge} - Class: {StudClas} - AvgMark: {StudAvgMark}");
         }
 
         public int[] MarkList = new int[3];
@@ -78,7 +73,7 @@ namespace Test
             student.StudAge = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Input student Class: ");
             student.StudClass = Console.ReadLine();
-            
+
             student.StudAvgMark = student.CallAvg(MarkList, StudAvgMark);
 
             students.Add(student.StudID, student.StudName + student.StudGender + student.StudAge + student.StudClass + student.StudAvgMark);
@@ -86,7 +81,34 @@ namespace Test
 
         public void ShowStudent(Hashtable students)
         {
-            Print(students);             
+            Print(students);
+        }
+
+        public void SearchStudent(Hashtable students)
+        {
+            Console.WriteLine("1. Search By ID: ");
+            Console.WriteLine("2. Search By Name: ");
+            Console.WriteLine("3. Search By Class: ");
+            Console.Write("Otion: ");
+
+            int choice1 = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice1)
+            {
+                case 1:
+                    Console.WriteLine("Nhap ID can tim: ");
+                    int id = Convert.ToInt32(Console.ReadLine());
+                    foreach (Hashtable student in students)
+                        if (student.ContainsKey(id))
+                            Console.WriteLine(student.Keys);
+                    break;
+                case 2:
+                
+                    break;
+                case 3:
+
+                    break;
+            }
         }
     }
 }
