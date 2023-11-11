@@ -31,7 +31,8 @@ public class Program
                     student.ShowStudent(students);
                     break;
                 case 3:
-                    
+                    Console.WriteLine();
+                    student.Print(students);
                     break;
                 case 4:
                     Console.WriteLine();
