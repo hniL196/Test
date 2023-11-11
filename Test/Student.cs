@@ -24,7 +24,7 @@ namespace Test
 
             foreach (DictionaryEntry entry in students)
             {
-                Console.WriteLine(entry.Key + ":" + entry.Value);
+                Console.WriteLine(entry.Key + ":" + entry.Value + "- Diem TB: " + student.CallAvg(MarkList,StudAvgMark));
             }
         }
 
